@@ -23,13 +23,13 @@ This package is not self-contained and have some external dependencies (see
 
 ### Downloading dependencies needed to use SConsGnuPackage
 
-If you have th ``sh``-compatible shell, just run the 
+If you have ``sh``-compatible shell, just run the 
 
     tools/download-user-deps.sh
 
 script from the top-level source directrory. It will download necessary python
-packages to ``site_scons`` directory. The script uses ``wget`` and ``tar``
-programs.
+packages into ``site_scons`` directory. The script uses ``wget`` and ``tar``
+programs. 
 
 ### Downloading dependencies needed to develop SConsGnuPackage
 
@@ -37,7 +37,7 @@ If you have th ``sh``-compatible shell, just run the
 
     tools/download-devel-deps.sh
 
-script from the top-level source directrory.  The script uses ``wget`` and
+script from top-level dir of your source tree. The script uses ``wget`` and
 ``tar`` programs.
 
 
@@ -48,7 +48,7 @@ REQUIREMENTS
 
 The ``SConsGnuPackage`` needs following external packages to function properly:
 
-  * ``SConsGnuVariables`` <https://github.com/ptomulik/scons-gnu-variables>
+  * SConsGnuVariables <https://github.com/ptomulik/scons-gnu-variables>
 
 The ``SConsGnuVariables`` is installed by ``tools/download-user-deps.sh``.
 
@@ -56,11 +56,11 @@ The ``SConsGnuVariables`` is installed by ``tools/download-user-deps.sh``.
 
 To generate user documentation you'll need:
   
-  * ``docbook-xml`` <http://www.oasis-open.org/docbook/xml/>
-  * ``xsltproc`` <ftp://xmlsoft.org/libxslt/>
-  * ``scons_docbook`` tool <https://bitbucket.org/dirkbaechle/scons_docbook/overview>
+  * docbook-xml <http://www.oasis-open.org/docbook/xml/>
+  * xsltproc <ftp://xmlsoft.org/libxslt/>
+  * scons docbook tool <https://bitbucket.org/dirkbaechle/scons_docbook/>
     
-The ``scons_docbook`` package is installed by ``tools/download-devel-deps.sh``.
+The scons docbook tool is installed by ``tools/download-devel-deps.sh``.
 
 To generate API documentation you'll need at least:
 
