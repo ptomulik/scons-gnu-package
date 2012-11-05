@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook V5.0//EN"
+                   "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude" id="sec-intro">
+  <title>Introduction</title>
+  <para>The <package>SConsGnuPackage</package> is an add-on to <productname>
+  SCons</productname> which supports creation and maintenance 
+  of installable packages for SCons-based projects. It is intended for use 
+  in projects where several (binary) debian packages as well as a 
+  source package has to be created from a single source. The
+  <package>SConsGnuPackage</package> package is designed to be used together
+  with <package>SConsGnuVariables</package>.</para>
+</section>

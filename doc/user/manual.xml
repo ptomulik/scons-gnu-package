@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V5.0//EN"
+                   "http://docbook.org/xml/5.0/dtd/docbook.dtd" [
+  <!ENTITY sec_intro SYSTEM "sec_intro.xml">
+  <!ENTITY sec_download_install SYSTEM "sec_download_install.xml">
+  <!ENTITY sec_debian_control SYSTEM "sec_debian_control.xml">
+]>
+<article xmlns="http://docbook.org/ns/docbook" 
+         xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0">
+  <title>SConsDebPackage</title>
+  <subtitle>User&apos;s Manual</subtitle>
+  <info>
+    <author>
+      <personname>Paweł Tomulik</personname>
+      <email>ptomulik@meil.pw.edu.pl</email>
+    </author>
+    <pubdate>2012-11-03</pubdate>
+  </info>
+  <!-- We stick to xi:include, as SCons dependency scanner recognizes them
+       automatically -->
+  <xi:include href="sec_intro.xml"/>
+  <xi:include href="sec_download_install.xml"/>
+  <!--<xi:include href="sec_gnu_package.xml"/>-->
+</article>

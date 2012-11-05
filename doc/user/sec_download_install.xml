@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook V5.0//EN"
+                   "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"  
+         xmlns:xi="http://www.w3.org/2001/XInclude" id="sec-download-install">
+	<title>Downloading and installing <package>SConsGnuPackage</package></title>
+  <para>
+    You may download and unpack source tarball
+    <informalexample>
+      <synopsis>
+  <prompt>user@host:$ </prompt><userinput>cd /tmp</userinput>
+  <prompt>user@host:$ </prompt><userinput>wget https://github.com/ptomulik/scons-gnu-package/tarball/master -O scons-gnu-package.tar.gz</userinput>
+  <prompt>user@host:$ </prompt><userinput>tar -xzf scons-gnu-package.tar.gz</userinput>
+      </synopsis>
+    </informalexample>
+    or clone the source from repository
+    <informalexample>
+      <synopsis>
+  <prompt>user@host:$ </prompt><userinput>cd /tmp</userinput>
+  <prompt>user@host:$ </prompt><userinput>git clone git://github.com/ptomulik/scons-gnu-package.git</userinput>
+      </synopsis>
+    </informalexample>
+  </para>
+  <para>
+    To install <package>SConsGnuPackage</package> locally in your project,
+    simply copy the directory <filename>SConsGnuPackage</filename> into your
+    project's <filename>site_scons/</filename> directory.
+    <informalexample>
+      <synopsis>
+  <prompt>user@host:$ </prompt><userinput>cp -r /tmp/*scons-gnu-package*/SConsGnuPackage myproj/site_scons/</userinput>
+      </synopsis>
+    </informalexample>
+  </para>
+  <para>
+  Download and install additional packages that
+  <package>SConsGnuPackage</package> depends on. The list of dependencies and
+  installation procedure is described in <filename>README.md</filename>.
+  </para>
+</section>

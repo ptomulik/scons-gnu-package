@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook V5.0//EN"
+                   "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+         xmlns:xi="http://www.w3.org/2001/XInclude" id="sec-debian-control">
+	<title>Handling the <filename>debian/control</filename> file</title>
+  <para>
+    The <filename>debian/control</filename> file is described by
+    <link xlink:href="http://www.debian.org/doc/debian-policy/">Debian Policy Manual</link>
+    in section 5.6
+    <link xlink:href="http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-sourcecontrolfiles">Source package control files -- <filename>debian/control</filename></link>.
+  </para>
+	<para>The <filename>debian/control</filename> is handled by the 
+	<classname>SConsDebPackage.Debian.Control</classname> module.</para>
+  <para>
+    <example xml:id="ex-JCMT">
+      <title>
+        Defining and printing paragraphs of <filename>debian/control</filename>
+        file.
+      </title>
+      <programlisting language="python">
+from SConsDebPackage import Debian
+import SConsDebPackage.Debian.Control
+dc = []
+# According to Debian Policy:
+#   "The first paragraph of the control file contains information about the 
+#    source package in general."
+dc.append(Debian.Control.SourceParagraph())
+#   "The subsequent sets each describe a binary package that the source tree
+#   builds."
+dc.append(Debian.Control.PackageParagraph())
+dc.append(Debian.Control.PackageParagraph())
+
+# Now, dc is a list of paragraphs for debian/control. The list represents
+# project with one source and two binary packages. Let's fill the paragraphs
+# with mandatory information.
+
+# General (source) paragraph
+dc[0]['source'] = 'foo'
+dc[0]['maintainer'] = 'John Smith &lt;jsmith@example.com&gt;'
+
+# First binary package paragraph
+dc[1]['package'] = 'libfoo1'
+dc[1]['architecture'] = 'any'
+dc[1]['description'] = """the foo core library
+  The foo core library contains core functionality of foo.
+  .
+  This is the package with libfoo shared library."""
+
+# Second binary package paragraph
+dc[2]['package'] = 'libfoo-dev'
+dc[2]['architecture'] = 'any'
+dc[2]['description'] = """the foo library development package
+  The foo core library contains core functionality of foo.
+  .
+  This is the development package for libfoo library."""
+
+# Print the paragraps out
+for para in dc:
+    print unicode(para)
+      </programlisting>
+      <para>
+        The output from above script will be following
+      </para>
+      <screen>
+Source: foo
+Maintainer: John Smith &lt;jsmith@example.com&gt;
+
+Package: libfoo1
+Architecture: any
+Description: the foo core library
+  The foo core library contains core functionality of foo.
+  .
+  This is the package with libfoo shared library.
+
+Package: libfoo-dev
+Architecture: any
+Description: the foo library development package
+  The foo core library contains core functionality of foo.
+  .
+  This is the development package for libfoo library.
+      </screen>
+    </example>
+  </para>
+  <para>
+    <example xml:id="ex-MJBP">
+      <title>
+        Iterating through paragraphs of existing 
+        <filename>debian/control</filename> file
+      </title>
+      <programlisting language="python">
+from SConsDebPackage import Debian
+import SConsDebPackage.Debian.Control
+parser = Debian.Control.Parser()
+for para in parser.iter_paragraphs(file('debian/control')):
+    print type(para)
+      </programlisting>
+      <para>
+        An example output for three-paragraph <filename>debian/control</filename>
+        file
+      </para>
+      <screen>
+&lt;class 'SConsDebPackage.Debian.Control.SourceParagraph'&gt;
+&lt;class 'SConsDebPackage.Debian.Control.PackageParagraph'&gt;
+&lt;class 'SConsDebPackage.Debian.Control.PackageParagraph'&gt;
+      </screen>
+    </example>
+  </para>
+</section>
+<!--
+??-HH8Y
+??-HX5F
+??-3F58
+??-QHGB
+??-OM2H
+??-Y2Z7
+??-AKZ0
+??-6D9U
+??-5IW9
+??-5YKQ
+??-QPTI
+??-DI3C
+??-CNPR
+??-M3D8
+??-XLM1
+??-KOX4
+??-JSJA
+??-T87R
+-->
