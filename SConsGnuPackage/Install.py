@@ -28,7 +28,7 @@ __docformat__ = "restructuredText"
 
 def _install_dest_common(env, pkg, uname2, source, **kw):
     from os import path
-    from SConsGnuVariables.AmUniformNames import ExtractDirPrefix
+    from SConsGnuVariables.AmUniformNames import RSplitMainPrefix
     from SConsGnuPackage.Control import GnuPkgName
     prefix, primary = uname2
     prefix_ = prefix + '_'
@@ -37,17 +37,17 @@ def _install_dest_common(env, pkg, uname2, source, **kw):
         relpath = path.relpath(source.get_abspath(), cwd)
     else:
         relpath = path.basename(source.get_abspath())
-    dir_prefix = ExtractDirPrefix(prefix,**kw)
-    dir_var = '$' + dir_prefix + 'dir'
-    if dir_prefix in ('data', 'libexec', 'pkgdata', 'pkginclude', 'pkglib', \
+    add_prefix, main_prefix = RSplitMainPrefix(prefix,**kw)
+    dir_var = '$' + main_prefix + 'dir'
+    if main_prefix in ('data', 'libexec', 'pkgdata', 'pkginclude', 'pkglib', \
                       'pkglibexec'):
         pkg_name = GnuPkgName(env, pkg,**kw)
         dir_base = path.join(env.subst(dir_var), pkg_name)
-    elif dir_prefix == 'doc':
+    elif main_prefix == 'doc':
         pkg_name = GnuPkgName(env,pkg,**kw)
         # FIXME: pkg_name suffix shall include version string?
         dir_base = env.subst(dir_var)
-    elif dir_prefix == 'locale':
+    elif main_prefix == 'locale':
         pkg_name = GnuPkgName(env,pkg,**kw)
         basename, ext = path.splitext(path.basename(source.get_abspath()))
         dir_base = path.join(env.subst(dir_var), basename)
@@ -90,18 +90,18 @@ def _program_install_dest(env, pkg, uname2, source, **kw):
 
 def _man_install_dest(env, pkg, uname2, source, **kw):
     from os import path
-    from SConsGnuVariables.AmUniformNames import ExtractDirPrefix, \
+    from SConsGnuVariables.AmUniformNames import RSplitMainPrefix, \
                                                  StandardManSections
     prefix, primary = uname2
     prefix_ = prefix + '_'
     if prefix_.find('nobase_') >= 0:
         raise ValueError("illegal 'nobase_' prefix in %r" \
                          % prefix + '_' + primary)
-    dir_prefix = ExtractDirPrefix(prefix,**kw)
-    # FIXME: what if dir_prefix is None?
+    add_prefix, main_prefix = RSplitMainPrefix(prefix,**kw)
+    # FIXME: what if main_prefix is None?
     std_sections = StandardManSections(**kw)
-    if len(dir_prefix) >= 4:
-        dp_sec = dir_prefix[3]
+    if len(main_prefix) >= 4:
+        dp_sec = main_prefix[3]
         if dp_sec not in std_sections:
             raise ValueError("non-standard man section in %r" \
                             % prefix + '_' + primary)
@@ -133,9 +133,9 @@ def _man_install_dest(env, pkg, uname2, source, **kw):
             dst_ext = env.subst('${man'+sec+'ext}')
     else:
         dst_ext = ext
-    # Choose dir_prefix containing man section
+    # Choose main_prefix containing man section
     if dp_sec is None:
-        dir_prefix = 'man' + sec
+        main_prefix = 'man' + sec
     dir_base, relpath = _install_dest_common(env, pkg, uname2, source, **kw)
     return path.join(dir_base, basename + dst_ext)
     
